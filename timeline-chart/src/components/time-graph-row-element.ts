@@ -55,7 +55,7 @@ export class TimeGraphRowElement extends TimeGraphComponent {
 
     renderLabel() {
         const position = this._options.position;
-        const width = Math.round(this._options.width);
+        const width = this._options.width;
         const textWidth = this.textWidth;
         const labelText = this._model.label;
         const fontName = TimeGraphRowElement.fontController.getFontName(this._options.color ? this._options.color : 0, this._options.height - 2);
