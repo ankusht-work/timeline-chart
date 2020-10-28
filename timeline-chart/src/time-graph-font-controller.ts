@@ -6,18 +6,34 @@ export class FontController {
     private fontColorMap: Map<number, string>;
     private defaultFontName: string = "LabelFont8White";
 
+    private mapTextFont: Map<string,PIXI.BitmapText>;
+
+
     constructor(fontFamily: string = "\"Lucida Console\", Monaco, monospace") {
         this.fontFamily = fontFamily;
         this.fontNameMap = new Map<number, Map<string, string>>();
-        this.fontColorMap = new Map<number, string>();
+        this.fontColorMap = new Map<number, string>();      
 
         const defaultFontSize = 8;
         this.updateFontNameMap(defaultFontSize);
+        this.mapTextFont = new Map<string,PIXI.BitmapText>();      
     }
+    
 
     getDefaultFontName(): string {
         return this.defaultFontName;
     }
+
+    getmapTextFont(label: string): PIXI.BitmapText | undefined {
+      if(!this.mapTextFont.has(label)){
+        this.mapTextFont.set(label,this.createMapTextFont(label));
+      }
+      return this.mapTextFont.get(label);
+    }
+
+    createMapTextFont(label: string) : PIXI.BitmapText {
+        return new PIXI.BitmapText(label, { fontName: this.getDefaultFontName()})
+    }   
 
     createFontName(fontColor: string, fontSize: number): string {
         const fontName = "LabelFont" + fontSize.toString() + fontColor;
