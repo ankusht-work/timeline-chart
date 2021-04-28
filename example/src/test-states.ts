@@ -8868,7 +8868,21 @@ export const timeGraphStates = {
                         "value": -2147483648
                     }
                 ]
+            },
+            {
+                "entryId": -1,
+                "annotations": [
+                    {
+                        "range": {
+                            "start": 1332170682486039800,
+                            "end": 1332170682487039800
+                        },
+                    }
+                ],
+                "states": []
             }
+
+
         ]
     },
     "status": "COMPLETED"

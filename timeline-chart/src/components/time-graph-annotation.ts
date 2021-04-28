@@ -4,6 +4,8 @@ import { TimeGraphRow } from "./time-graph-row"
 
 export interface TimeGraphAnnotationComponentOptions extends TimeGraphComponentOptions {
     position: TimeGraphElementPosition
+    width: number
+    height: number
 }
 
 export interface TimeGraphAnnotationStyle extends TimeGraphComponentOptions {
@@ -11,6 +13,7 @@ export interface TimeGraphAnnotationStyle extends TimeGraphComponentOptions {
     size?: number
     color?: number
     verticalAlign?: string
+    opacity?: number
 }
 
 /*
@@ -27,7 +30,7 @@ export class TimeGraphAnnotationComponent extends TimeGraphComponent {
 
     constructor(id: string,
         protected _options: TimeGraphAnnotationComponentOptions,
-        protected _style: TimeGraphAnnotationStyle = { color: 0, size: 7, symbol: 'cross', verticalAlign: 'middle' },
+        protected _style: TimeGraphAnnotationStyle = { color: 0, size: 7, symbol: 'cross', verticalAlign: 'middle', opacity: 0.2 },
         protected _row: TimeGraphRow,
         displayObject?: PIXI.Graphics) {
         super(id, displayObject);
@@ -60,6 +63,15 @@ export class TimeGraphAnnotationComponent extends TimeGraphComponent {
         const y = this._options.position.y;
 
         if (symbol === undefined || symbol == 'none') {
+            this.rect(
+                {
+                    color: this._style.color,
+                    height: this._options.height,
+                    width: this._options.width,
+                    position: this._options.position,
+                    opacity: this._style.opacity
+                }
+            )
             return;
         }
         if (symbol == 'circle') {

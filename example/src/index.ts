@@ -131,7 +131,13 @@ const timeGraphChart = new TimeGraphChart('timeGraphChart', {
             lineColor: row.data && row.data.hasStates ? 0xdddddd : 0xaa4444,
             lineThickness: row.data && row.data.hasStates ? 1 : 3
         }
+    },
+    rowAnnotationStyleProvider: (annotation: TimelineChart.TimeGraphAnnotation) => {
+        return {
+            color: 0xFF0000, size: 7, symbol: 'none', verticalAlign: 'middle'
+        }
     }
+
 }, rowController);
 timeGraphChartContainer.addLayer(timeGraphChart);
 
