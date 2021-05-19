@@ -259,7 +259,7 @@ export class TestDataProvider {
                     end: entry.endTime - entry.startTime
                 },
                 states,
-                annotations: annotations.concat(rangeEvents),
+                annotations: annotations,
                 data: {
                     type: entry.type,
                     hasStates
@@ -284,6 +284,7 @@ export class TestDataProvider {
             id: "",
             arrows,
             rows,
+            rangeEvents,
             totalLength: this.totalLength
         };
     }

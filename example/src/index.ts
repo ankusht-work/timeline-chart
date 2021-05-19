@@ -5,15 +5,17 @@ import { TimeGraphRowController } from "timeline-chart/lib/time-graph-row-contro
 import { TimeGraphNavigator } from "timeline-chart/lib/layer/time-graph-navigator";
 import { TimeGraphContainer } from "timeline-chart/lib/time-graph-container";
 import { TimeGraphChartCursors } from "timeline-chart/lib/layer/time-graph-chart-cursors";
-import { TimeGraphChartSelectionRange } from "timeline-chart/lib/layer/time-graph-chart-selection-range";
-import { TimeGraphAxisCursors } from "timeline-chart/lib/layer/time-graph-axis-cursors";
+// import { TimeGraphChartSelectionRange } from "timeline-chart/lib/layer/time-graph-chart-selection-range";
+// import { TimeGraphAxisCursors } from "timeline-chart/lib/layer/time-graph-axis-cursors";
 // import { timeGraph } from "timeline-chart/lib/test-data";
 import { TimelineChart } from "timeline-chart/lib/time-graph-model";
 import { TimeGraphStateStyle } from "timeline-chart/lib/components/time-graph-state";
 import { TestDataProvider } from "./test-data-provider";
 import { TimeGraphChartGrid } from "timeline-chart/lib/layer/time-graph-chart-grid";
 import { TimeGraphVerticalScrollbar } from "timeline-chart/lib/layer/time-graph-vertical-scrollbar";
-import { TimeGraphChartArrows } from "timeline-chart/lib/layer/time-graph-chart-arrows";
+// import { TimeGraphChartArrows } from "timeline-chart/lib/layer/time-graph-chart-arrows";
+import { TimeGraphChartRangeEvents } from "timeline-chart/lib/layer/time-graph-chart-range-events";
+
 
 const styleConfig = {
     mainWidth: 1000,
@@ -141,6 +143,7 @@ const timeGraphChart = new TimeGraphChart('timeGraphChart', {
 }, rowController);
 timeGraphChartContainer.addLayer(timeGraphChart);
 
+
 timeGraphChart.registerStateMouseInteractions({
     click: el => {
         console.log(el.model.label);
@@ -150,16 +153,19 @@ timeGraphChart.registerStateMouseInteractions({
     }
 });
 
-const timeGraphChartArrows = new TimeGraphChartArrows('timeGraphChartArrows', rowController);
-timeGraphChartContainer.addLayer(timeGraphChartArrows);
-timeGraphChartArrows.addArrows(timeGraph.arrows);
+// const timeGraphChartArrows = new TimeGraphChartArrows('timeGraphChartArrows', rowController);
+// timeGraphChartContainer.addLayer(timeGraphChartArrows);
+// timeGraphChartArrows.addArrows(timeGraph.arrows);
+// const timeAxisCursors = new TimeGraphAxisCursors('timeGraphAxisCursors', { color: styleConfig.cursorColor });
+// timeGraphAxisContainer.addLayer(timeAxisCursors);
+// const timeGraphSelectionRange = new TimeGraphChartSelectionRange('chart-selection-range', { color: styleConfig.cursorColor });
+// timeGraphChartContainer.addLayer(timeGraphSelectionRange);
+ const timeGraphChartCursors = new TimeGraphChartCursors('chart-cursors', timeGraphChart, rowController, { color: styleConfig.cursorColor });
+ timeGraphChartContainer.addLayer(timeGraphChartCursors);
 
-const timeAxisCursors = new TimeGraphAxisCursors('timeGraphAxisCursors', { color: styleConfig.cursorColor });
-timeGraphAxisContainer.addLayer(timeAxisCursors);
-const timeGraphSelectionRange = new TimeGraphChartSelectionRange('chart-selection-range', { color: styleConfig.cursorColor });
-timeGraphChartContainer.addLayer(timeGraphSelectionRange);
-const timeGraphChartCursors = new TimeGraphChartCursors('chart-cursors', timeGraphChart, rowController, { color: styleConfig.cursorColor });
-timeGraphChartContainer.addLayer(timeGraphChartCursors);
+const timeGraphChartRangeEvents = new TimeGraphChartRangeEvents('timeGraphChartRangeEvents', rowController);
+timeGraphChartContainer.addLayer(timeGraphChartRangeEvents);
+timeGraphChartRangeEvents.addRangeEvents(timeGraph.rangeEvents);
 
 const cursorReset = document.getElementById('cursor-reset');
 if (cursorReset) {

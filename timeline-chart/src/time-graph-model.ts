@@ -9,6 +9,7 @@ export namespace TimelineChart {
         totalLength: number
         rows: TimeGraphRowModel[]
         arrows: TimeGraphArrow[]
+        rangeEvents: TimeGraphAnnotation[]
         readonly data?: { [key: string]: any }
     }
 
@@ -47,4 +48,11 @@ export namespace TimelineChart {
         selected?: boolean
         readonly data?: { [key: string]: any }
     }
+
+    // export interface TimeGraphRangeEvent {
+    //     readonly id: string
+    //     readonly range: TimeGraphRange
+    //     readonly data?: { [key: string]: any }
+
+    // }
 }
